@@ -3,7 +3,7 @@ import { functions } from "@functions/index";
 import { ServerlessFrameworkConfiguration } from "serverless-schema";
 
 const serverlessConfiguration: ServerlessFrameworkConfiguration = {
-  service: "typescript-template",
+  service: "explore-middy",
   useDotenv: true,
   custom: {
     esbuild: {
