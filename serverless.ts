@@ -1,3 +1,4 @@
+import env from "@lib/env";
 import { functions } from "@functions/index";
 import { ServerlessFrameworkConfiguration } from "serverless-schema";
 
@@ -10,7 +11,7 @@ const serverlessConfiguration: ServerlessFrameworkConfiguration = {
       minify: true,
       sourcemap: true,
     },
-    stage: "${opt:stage, self:provider.stage}",
+    stage: env.STAGE,
     stages: ["uat", "alpha", "prod"],
     prune: {
       automatic: true,
@@ -21,10 +22,14 @@ const serverlessConfiguration: ServerlessFrameworkConfiguration = {
   provider: {
     name: "aws",
     runtime: "nodejs16.x",
-    region: "us-west-2",
-    stage: '${opt:stage, "uat"}',
+    region: "ap-south-1",
+    stage: env.STAGE,
     environment: {
+      ...env,
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
+    },
+    deploymentBucket: {
+      name: "serverless-deployment-bucket-backend",
     },
   },
   functions,
